@@ -1,6 +1,8 @@
-##javascript垃圾回收机制
+## javascript垃圾回收机制
 
-**网上摘录 原作者：xlyszfph**
+**网上摘录**
+
+**原作者：xlyszfph**
 
 **原文链接[http://blog.csdn.net/ustccw/article/details/78634250](http://blog.csdn.net/ustccw/article/details/78634250)**
 
