@@ -84,3 +84,20 @@ function fn1(a){
 fn1(a);           
 alert(a);         //0
 ```
+>在全局下的预解析过程中，if，for，switch等流程控制语句不具备作用域。但是有一个**兼容性问题:firefox 不能预解析代码块里面的函数**
+```
+   alert(fn1)
+   if(true){
+      fn1(){
+         alert(1);
+      }
+   };
+  
+   firefox: fn1 is not defiend
+   chrome: function fn1(){
+               alert(1)
+            } 
+   ie:   function fn1(){
+            alert(1)
+         }
+```
