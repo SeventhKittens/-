@@ -1,6 +1,8 @@
-##javascript 垃圾回收机制##
-**网上摘录 原作者：xlyszfph **
-** 原文链接[http://blog.csdn.net/ustccw/article/details/78634250](http://blog.csdn.net/ustccw/article/details/78634250) **
+##javascript垃圾回收机制
+
+**网上摘录 原作者：xlyszfph**
+
+**原文链接[http://blog.csdn.net/ustccw/article/details/78634250](http://blog.csdn.net/ustccw/article/details/78634250)**
 
 >在公司经常会听到大牛们讨论时说道内存泄露神马的，每每都惊羡不已，最近精力主要用在了Web 开发上，读了一下《JavaScript高级程序设计》（书名很唬人，实际作者写的特别好，由浅入深）了解了一下JavaScript垃圾回收机制，对内存泄露有了一定的认识。
   
