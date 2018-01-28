@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>百度下拉提示</title>
+    <style>
+        *{margin:0;padding:0;}
+        #main{width:362px;margin:100px auto;}
+        #main input{width:350px;height:30px;padding:5px;border:1px solid #000;font-size:15px;font-family:'微软雅黑';outline:none;margin-bottom:15px;}
+        #main ul{width:100%;border:1px solid #000;display:none;}
+        #main ul li{width:100%;list-style:none;}
+        #main ul li a{display:block;font:normal normal 15px/24px '微软雅黑';text-decoration:none;color:#000;}
+        #main ul li a:hover{background:gray;}
+    </style>
+    <script>
+        window.onload = function(){
+            var main = document.getElementById('main');
+            var input = main.getElementsByTagName('input');
+            var ul = document.getElementsByTagName('ul');
+            input[0].focus();
+            input[0].onkeyup = function(){
+                if(this.value != ''){
+                    ul[0].style.display = 'block';
+                    var url = 'http://suggestion.baidu.com/su?wd='+this.value+'&cb=cback';
+                    cScript(url);
+                }else{
+                    ul[0].style.display = 'none';
+                }
+            }
+            window.cback = function(data){
+                if(data.s.length){
+                    var str = '';
+                    for(var i=0;i<data.s.length;i++){
+                        str += '<li><a target="_blank" href="http://www.baidu.com/s?wd='+data.s[i]+'">'+ data.s[i] +'</a></li>';
+                    }
+                    ul[0].innerHTML = str;
+                }else{
+                    ul[0].style.display = 'none';
+                }
+            }
+            function cScript(url){
+                var script = document.createElement('script');
+                script.src = url;
+                document.body.appendChild(script);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="main">
+        <input type="text" />
+        <ul>
+        </ul>
+    </div>
+</body>
+</html>
