@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>分页运动</title>
+    <script src='move.js'></script>
+    <script>
+        window.onload = function(){
+            var json = {
+                "title":[]
+            }
+            for(var i=1;i<=44;i++){
+                json.title.push(i);
+            }
+            var iNow = 9;
+            var timer = null;
+            var arr = [];
+            page({
+                'id':'box',
+                'nowNum':1,
+                'allNum':Math.ceil(json.title.length/10),
+                'callBack':function(now,all){
+                    var num = now*10<json.title.length?10:json.title.length -(now-1)*10;
+                    var ul = document.getElementById('ul');
+                    var li = ul.getElementsByTagName('li');
+                    if(ul.innerHTML == ''){
+                        for(var i=0;i<num;i++){
+                            var oli = document.createElement('li');
+                            oli.innerHTML = json.title[(now-1)*10 +i];
+                            ul.appendChild(oli);
+                            
+                        }
+                        setTimeout(function(){          
+                            for(var i=0;i<li.length;i++){
+                                arr.push([li[i].getBoundingClientRect().left,li[i].getBoundingClientRect().top])
+                            }
+                            for(var i=0;i<li.length;i++){
+                                li[i].style.float = 'none';
+                                li[i].style.position = 'absolute';
+                            }
+                            for(var i=0;i<li.length;i++){
+                                li[i].style.left = arr[i][0] + 'px';
+                                li[i].style.top = arr[i][1] + 'px';
+                                li[i].style.margin = '0px'; 
+                            }
+                        },300)
+                    }else{
+                        timer = setInterval(function(){
+                            startMove(li[iNow],{'top':250,'left':633,'opacity':0},function(){
+                                this.style.display = 'none'
+                            });
+                            if(iNow == 0){
+                                clearInterval(timer);
+                                iNow = num-1;
+                                for(var i=0;i<=iNow;i++){
+                                    li[i].innerHTML = json.title[(now-1)*10 +i];
+                                }
+                                var timer2 = setInterval(function(){
+                                    li[iNow].style.display = 'block';
+                                    startMove(li[iNow],{'top':arr[iNow][1],'left':arr[iNow][0],'opacity':100});
+                                    if(iNow == 0){
+                                        clearInterval(timer2);
+                                        iNow = num - 1;
+                                    }else{
+                                            iNow--;
+                                    }
+                                },200)
+                            }else{
+                                iNow--;
+                            }
+                        },200)
+
+                    }
+                }
+            })
+        }
+        
+    </script>
+    <style>
+        *{margin:0;padding:0;}
+        .clearfix:after{content:'';height:0;display:block;visibility:hidden;clear:both;}
+        .clearfix{*zoom:1;}
+        #ul{margin:0 auto;width:600px;height:240px;}
+        #ul li{width:100px;height:100px;background:red;margin:10px;float:left;list-style:none;text-align:center;line-height:100px;}
+        #box{width:600px;height:40px;text-align:center;margin:0 auto;line-height:40px;}
+        #box a{margin:10px;color:#000;}
+    </style>
+</head>
+<body>
+    <ul id="ul" ></ul>
+    <div id="box">
+    </div>
+</body>
+</html>
