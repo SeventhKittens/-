@@ -30,7 +30,7 @@
                             ul.appendChild(oli);
                             
                         }
-                        setTimeout(function(){          
+                        setTimeout(function(){                      //此处看似多余，但在360下可以避免bug
                             for(var i=0;i<li.length;i++){
                                 arr.push([li[i].getBoundingClientRect().left,li[i].getBoundingClientRect().top])
                             }
